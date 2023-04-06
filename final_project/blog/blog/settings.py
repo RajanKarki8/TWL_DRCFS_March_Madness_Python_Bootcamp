@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#%hlmaj$+uneq#j10z3n$0os_&6lvs2@+e^7zu$z&@#(0g@f^2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 
@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'user_blog.apps.UserBlogConfig',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
@@ -122,3 +124,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
