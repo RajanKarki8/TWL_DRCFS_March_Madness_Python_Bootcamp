@@ -1,0 +1,22 @@
+{%extends 'user_blog/base.html'%}
+{%block content%}
+
+   {% comment %} <div class ='container-fluid'> {% endcomment %}
+<h3 class = 'wrapper'>Are you sure you want to delete {{item}} ?</h3>
+   {% comment %} </div> {% endcomment %}
+    {% comment %} <div class = 'container'> {% endcomment %}
+        <form method = 'POST'>
+            {% csrf_token %}
+             <div class = 'fluid'> 
+            <button class = 'btn btn-danger btn-sm' type = 'submit'>Delete</button>
+             </div> 
+        </form>
+    </div>
+    <div class = 'container-fluid'>
+    <a href = "{%url 'home'%}">
+   <button class= 'btn btn-primary btn-sm'>Cancel</button>
+    </a>
+</div>
+</div>
+
+{%endblock content%}

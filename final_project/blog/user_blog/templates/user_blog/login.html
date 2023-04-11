@@ -1,0 +1,22 @@
+{%extends 'user_blog/base.html'%}
+{%load crispy_forms_tags%}
+{%block content%}
+<div class = 'container'>
+ <h1>Login Here</h1>
+<form method = 'POST' action = ''>
+    
+    {% csrf_token %}
+    {% comment %} <label>Username</label>
+    <input type = 'text' placeholder = 'enter your username' name = 'Username'>
+    <label>Password</label>
+    <input type = 'Password' placeholder = 'enter your password' name = 'Password'>
+    <br> {% endcomment %}
+    {{form|crispy}}
+    <input type = 'submit' class = 'btn btn-success btn-sm mt-1 mb-1' value  = 'Login'>
+</form>
+</div> 
+<div class = 'container'>
+<p>Don't Have an account ?</p>
+<a href = "{%url 'register'%}">Signup</a>
+</div>
+{%endblock content%}

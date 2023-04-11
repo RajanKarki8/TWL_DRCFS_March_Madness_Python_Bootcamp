@@ -1,0 +1,13 @@
+{%extends 'user_blog/base.html'%}
+{%load crispy_forms_tags%}
+{%block content%}
+<div class = 'container'>
+    <h2>Register Here</h2>
+    <form method = 'POST' action = ''>
+        {%csrf_token%}
+        {{form|crispy}}
+        <input type = 'submit' value = 'Signup' class = 'btn btn-primary btn-sm mt-1 mb-1'> 
+    </form><hr>
+    <p> Already Have an Account ?</p><a href = "{%url 'login'%}">Login</a>
+</div>
+{%endblock content%}
