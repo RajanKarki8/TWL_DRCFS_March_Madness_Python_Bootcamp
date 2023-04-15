@@ -8,6 +8,7 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = BlogPost
         fields = '__all__'
+        exclude = ['author']
         
 class RegisterForm(UserCreationForm):
     email = models.EmailField()

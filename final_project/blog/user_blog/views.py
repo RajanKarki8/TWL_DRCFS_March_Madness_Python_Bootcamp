@@ -19,6 +19,8 @@ def createBlog(request):
     if request.method == 'POST':
         form = BlogForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
             form.save()
             messages.success(request, 'Blog is added successfully!..')
             return redirect('home')
@@ -31,6 +33,7 @@ def detail_view(request, pk):
     blog = BlogPost.objects.get(id = pk)
     
     context = {'blog':blog}
+    messages.info(request, 'Login to Update and delete your blog..!')
     return render(request, 'user_blog/blog-detail.html', context)
 
 def update_view(request,pk):
