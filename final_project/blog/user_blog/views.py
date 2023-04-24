@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from . models import BlogPost
+from . models import BlogPost, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -31,8 +31,17 @@ def createBlog(request):
 
 def detail_view(request, pk):
     blog = BlogPost.objects.get(id = pk)
-    
-    context = {'blog':blog}
+    comments  = blog.comment_set.all()
+    if request.method == 'POST':
+        comment = Comment.objects.create(
+            user = request.user,
+            blog = blog,
+            body =  request.POST.get('body')
+            
+        )
+        return redirect('blog-detail', pk = blog.id)
+       
+    context = {'blog':blog, 'comments':comments}
     messages.info(request, 'Login to Update and delete your blog..!')
     return render(request, 'user_blog/blog-detail.html', context)
 
@@ -85,7 +94,7 @@ def user_login (request):
             user = User.objects.get(username = username)
         except:
             messages.error(request, 'user does not exit')
-        user = authenticate(request, username = username, password= password)
+        user = authenticate(request, username = username, password = password)
         if user is not None:
             login(request, user)
             return redirect('home')

@@ -18,10 +18,23 @@ class BlogPost(models.Model):
         return self.title
     
 # class Comment(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.SET_NULL,null= True)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE,null= True)
 #     created_date = models.DateTimeField(auto_now_add=True)
 #     body = models.TextField()    
 #     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
     
 #     def __str__(self):
 #         return self.body
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    created= models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    body = models.TextField()
+    blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True)
+    
+    
+    def __str__(self):
+        return self.body
+    
+    class Meta:
+        ordering = ['-created']

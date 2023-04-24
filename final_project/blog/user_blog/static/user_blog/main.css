@@ -21,12 +21,22 @@ body {
     text-decoration: 2px;
 }
 
-.container-fluid {
+.cotainer-fluid {
     margin-left: 20px;
 }
 
 .fluid {
     margin-left: 20px;
+}
+
+
+/* .content {
+    display: grid;
+    grid-template-columns: 7fr 2fr;
+} */
+
+.main {
+    font-size: small;
 }
 
 
