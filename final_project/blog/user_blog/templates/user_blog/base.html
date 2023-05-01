@@ -15,15 +15,13 @@
     </head>
         <link rel="stylesheet" type = 'text/css' href="{%static 'user_blog/main.css'%}">
     <body>
-        {% if messages %}
-           
+        {% if messages %}   
         {% for message in messages %}
         <div class = 'alert-alert'>
         <h3>{{ message }}</h3>
         </div>
         {% endfor %}
-      
-            {% endif %}
+        {% endif %}
         {%block content%}
         {%endblock content%}
     </body>

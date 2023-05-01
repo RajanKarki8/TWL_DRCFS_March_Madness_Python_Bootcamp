@@ -37,7 +37,6 @@ def detail_view(request, pk):
             user = request.user,
             blog = blog,
             body =  request.POST.get('body')
-            
         )
         return redirect('blog-detail', pk = blog.id)
        
@@ -47,8 +46,6 @@ def detail_view(request, pk):
 
 def update_view(request,pk):
     room = BlogPost.objects.get(id = pk)
- 
-    
     if request.method == 'POST':
         form = BlogForm(request.POST, instance=room)
         if form.is_valid():
@@ -78,7 +75,7 @@ def UserRegister(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Account is created.')
-            return redirect('home')
+            return redirect('login')
         
     else:
         form = RegisterForm()
@@ -110,4 +107,4 @@ def user_logout(request):
     logout(request)
     messages.info(request, 'logout is happened !')
     return redirect('home')
-    
+

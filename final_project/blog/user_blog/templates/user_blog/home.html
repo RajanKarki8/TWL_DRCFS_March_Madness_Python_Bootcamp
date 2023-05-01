@@ -7,7 +7,7 @@
 <div class = 'container'>
     <h3><a class = 'blog-title' href = {%url 'blog-detail' blog.id%}>{{blog.title}}</h3></a>
 
- <strong>by-{{blog.author}} | {{blog.created_date|date:'F-d Y'}}</strong><br><hr>
+ <strong>{{blog.author}}  | {{blog.created_date|date:'F-d Y'}}</strong><br><hr>
 <small>{{blog.content_blog}}</small><hr>
 </div>
 </div>
