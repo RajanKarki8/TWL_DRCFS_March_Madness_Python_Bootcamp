@@ -126,3 +126,8 @@ LOGIN_URL = 'login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# Google API keys
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1041952248827-f6ro0m1ua6m77029p960diu9cd5s4ngd.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'your-client-secret'
+

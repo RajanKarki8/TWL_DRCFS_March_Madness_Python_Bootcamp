@@ -108,3 +108,12 @@ def user_logout(request):
     messages.info(request, 'logout is happened !')
     return redirect('home')
 
+
+from django.db.models import Q
+def search(request):
+    query = request.GET.get('query', '')
+    Posts = BlogPost.objects.filter(Q(title__icontains = query)|Q(content_blog__icontains=query))
+    context = {'query':query, 'Posts':Posts}
+    return render(request, 'user_blog/search.html', context)
+    
+        
