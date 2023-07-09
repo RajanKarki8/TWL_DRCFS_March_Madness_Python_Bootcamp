@@ -1,16 +1,67 @@
-{%extends 'user_blog/base.html'%}
+{% extends 'user_blog/base.html' %}
+
+{% block content %}
+<div class="content-section">
+  {% for blog in blogs %}
+  <div class="container">
+    <div class="space">
+      {% if blog.images %}
+      <figure class="images">
+        <img src="{{ blog.images.url }}" width="100" height="100">
+      </figure>
+      <h5><a class="blog-title" href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a></h5>
+      <div class="author-date">
+        <strong>{{ blog.author }} | {{ blog.created_date|date:'F-d Y' }}</strong>
+      </div>
+      {% endif %}
+      <br>
+      <small>{{ blog.truncated_content }}</small>
+      {% if blog.content_blog|length > 100 %}
+      <a href="{% url 'blog-detail' blog.id %}">Read More</a>
+      {% endif %}
+      <hr>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+
+
+
+{% comment %} {%extends 'user_blog/base.html'%}
 
 {%block content%}
-
-{%for blog in blogs%}
 <div class = 'content-section'>
-<div class = 'container'>
-    <h3><a class = 'blog-title' href = {%url 'blog-detail' blog.id%}>{{blog.title}}</h3></a>
+{%for blog in blogs%}
 
- <strong>{{blog.author}}  | {{blog.created_date|date:'F-d Y'}}</strong><br><hr>
-<small>{{blog.content_blog}}</small><hr>
+<div class = 'container'>
+<div class = 'space'>
+
+
+{%if blog.images%}
+<figure class='images'>
+    <img src = "{{blog.images.url}}" width ='100' height = '100'>
+</figure>
+<h5><a class = 'blog-title' href = {%url 'blog-detail' blog.id%}>{{blog.title}}</h3></a>
+    <strong>{{blog.author}}  | {{blog.created_date|date:'F-d Y'}}</strong>
+{%endif%}
+
+<br>
+
+
+
+
+<small>{{ blog.truncated_content }}</small>
+            {% if blog.content_blog|length > 100 %}
+                <a href="{% url 'blog-detail' blog.id %}">Read More</a>
+            {% endif %}
+            <hr>
 </div>
 </div>
 {%endfor %}
 
-{%endblock content%}
+</div>
+
+{%endblock content%} {% endcomment %}
+

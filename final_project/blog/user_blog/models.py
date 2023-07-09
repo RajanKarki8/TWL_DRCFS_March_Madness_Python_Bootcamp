@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import Truncator
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
@@ -7,12 +8,17 @@ class BlogPost(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    images = models.ImageField(upload_to= 'images/', blank=True, null=True)
     
     class Meta:
         ordering = ['-created_date']
             
     def __str__(self):
         return self.title
+    
+    # @property
+    # def truncated_content(self):
+    #     return Truncator(self.content_blog).chars(100)
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
@@ -28,5 +34,5 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-created']
     
-class Profile(models.Model):
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+# class Profile(models.Model):
+#     profile = models.ForeignKey(User, on_delete=models.CASCADE

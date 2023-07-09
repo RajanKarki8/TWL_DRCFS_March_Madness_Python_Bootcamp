@@ -7,6 +7,7 @@ from .forms import BlogForm, RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q
 
 def home_view(request):
     blogs = BlogPost.objects.all() 
@@ -41,7 +42,7 @@ def detail_view(request, pk):
         return redirect('blog-detail', pk = blog.id)
        
     context = {'blog':blog, 'comments':comments}
-    messages.info(request, 'Login to Update and delete your blog..!')
+    # messages.info(request, 'Login to Update and delete your blog..!')
     return render(request, 'user_blog/blog-detail.html', context)
 
 def update_view(request,pk):
@@ -50,7 +51,7 @@ def update_view(request,pk):
         form = BlogForm(request.POST, instance=room)
         if form.is_valid():
             form.save()
-            messages.success(request, f'{room} is updated successfully!..')
+            messages.success(request, f'{room} updated')
             return redirect('home')
     else:
         form = BlogForm(instance=room)
@@ -61,7 +62,7 @@ def delete_view(request, pk):
     item = BlogPost.objects.get(id = pk)
     if request.method == 'POST':
         item.delete()
-        messages.success(request,  f'{item} deleted successfully..')
+        messages.success(request,  f'{item} deleted!')
         return redirect('home')
     else:
         context = {'item':item}
@@ -74,7 +75,7 @@ def UserRegister(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Account is created.')
+            messages.success(request, f'Account created.')
             return redirect('login')
         
     else:
@@ -108,10 +109,8 @@ def user_logout(request):
     messages.info(request, 'logout is happened !')
     return redirect('home')
 
-
-from django.db.models import Q
 def search(request):
-    query = request.GET.get('query', '')
+    query = request.GET.get('query') if request.GET != None else ''
     Posts = BlogPost.objects.filter(Q(title__icontains = query)|Q(content_blog__icontains=query))
     context = {'query':query, 'Posts':Posts}
     return render(request, 'user_blog/search.html', context)

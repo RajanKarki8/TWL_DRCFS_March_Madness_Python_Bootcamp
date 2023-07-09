@@ -16,11 +16,9 @@
     {% comment %} <li class="nav-item">
       <a class="nav-link" href="{%url 'profile'%}">Profile</a>
     </li> {% endcomment %}
-    <form action = "{%url 'search'%}" method="get">
-      <input type="text" name="query" placeholder="Search...">
-      <input type="submit" value="Search">
+    <form class="d-flex" action ="{%url 'search'%}" method = 'get'>
+      <input class="form-control me-2" name = 'query'  placeholder="Search" aria-label="Search">
     </form>
-    
 
 
   </ul>
